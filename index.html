@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
   <head>
     <title>Temperature Hot</title>
     <!-- Required meta tags -->
@@ -88,4 +89,97 @@
       //     .then(data => console.log(data.weather[0].icon));
     </script>
   </body>
+=======
+   <head>
+      <title>Temperature Hot</title>
+      <!-- Required meta tags -->
+      <meta charset="utf-8" />
+      <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      />
+      <!-- Bootstrap CSS -->
+      <link
+         rel="stylesheet"
+         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      />
+      <style>
+         body {
+            background: url(images/bg-image.jpg) no-repeat;
+            background-size: cover;
+            height: 100vh;
+         }
+      </style>
+   </head>
+
+   <body>
+      <div class="container">
+         <form class="col-md-6 m-auto py-5">
+            <div class="input-group mb-3">
+               <input
+                  id="place"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter a location for weather..."
+               />
+               <div class="input-group-append">
+                  <button id="search" type="button" class="btn btn-danger">
+                     Search
+                  </button>
+               </div>
+            </div>
+         </form>
+         <div class="weather-status text-white text-center">
+            <img
+               id="image"
+               src="https://openweathermap.org/img/wn/02d@2x.png"
+               alt=""
+            />
+            <h1 id="setPlace">Place</h1>
+            <h3><span id="weather">Temperature</span> &deg;C</h3>
+            <h1 id="condition" class="lead">Weather</h1>
+         </div>
+      </div>
+
+      <script>
+         //  apikey 0d436f4b79329aa8327e905632909faa
+         // add event to weather details
+         document
+            .getElementById("search")
+            .addEventListener("click", function () {
+               const place = document.getElementById("place").value;
+               document.getElementById("setPlace").innerText = place;
+               document.getElementById("place").value = "";
+               getWeather(place);
+            });
+
+         // declare function to get weather details
+         function getWeather(id) {
+            fetch(
+               `https://api.openweathermap.org/data/2.5/weather?q= ${id}&units=metric&appid=0d436f4b79329aa8327e905632909faa`
+            )
+               .then(res => res.json())
+               .then(data => getWeather(data));
+            function getWeather(data) {
+               const weatherIcon = data.weather[0].icon;
+               document.getElementById(
+                  "image"
+               ).src = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
+               const weather = data.main.temp;
+               const tempCondition = data.weather[0].main;
+               document.getElementById("weather").innerText = weather;
+               document.getElementById("condition").innerText = tempCondition;
+            }
+         }
+
+         // this is for my practice
+
+         // fetch(
+         //     'https://api.openweathermap.org/data/2.5/weather?q=London&appid=0d436f4b79329aa8327e905632909faa'
+         // )
+         //     .then(res => res.json())
+         //     .then(data => console.log(data.weather[0].icon));
+      </script>
+   </body>
+>>>>>>> 01caf52659e32a731a847f382b533950f15235b8
 </html>
